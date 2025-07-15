@@ -1,0 +1,225 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="MIT Jameel Clinic AI Hospital Network" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/jclinic-favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>  
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+	</head>
+	<body>
+    <header id="pageHeader">
+      <img src="/jclinic.jpg" alt="MIT Jameel Clinic Logo" class="header-logo" onerror="this.onerror=null;this.src='https://placehold.co/200x50/ffffff/000000?text=J-Clinic';" />
+      <h1>MIT Jameel Clinic AI Hospital Network</h1>
+    </header>
+
+		<slot />
+
+    <div class="footer-text">
+      <p>Questions? Email <a href="mailto:jclinic-info@mit.edu">jclinic-info@mit.edu</a>. If you are a hospital, clinic, or cancer center interested in joining our hospital network, please fill in our form.</p>
+    </div>
+	</body>
+</html>
+<style is:global>
+:root {
+  --mit-red: #000000;
+  --teal: #007e8a;
+  --bg-light: #f0faff;
+  --text: #111;
+  --mirai-color: #695CAB;
+  --sybil-color: #9CBAE8;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom right, #f4faff, #ffffff);
+  color: var(--text);
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.2rem 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  z-index: 1000;
+  transition: top 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logo {
+  position: absolute;
+  left: 1rem;
+  height: 40px;
+  width: auto;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  text-align: center;
+  font-weight: 800;
+  color: var(--mit-red);
+  flex: 1;
+}
+
+.title-container {
+  text-align: center;
+  padding-top: 5.2rem;
+  margin-bottom: 1rem;
+}
+
+.title-container h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--mit-red);
+}
+
+.title-container p {
+  font-size: 1rem;
+  color: #444;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.toggle-btn {
+  background: #fff;
+  border: 2px solid #ddd;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.toggle-btn.active {
+  color: white;
+  border-color: transparent;
+}
+
+.toggle-btn.mirai.active {
+  background: var(--mirai-color);
+}
+
+.toggle-btn.sybil.active {
+  background: var(--sybil-color);
+}
+
+.map-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem 1rem 1rem;
+}
+
+#map {
+  width: 90vw;
+  height: 75vh;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.legend {
+  background: #ffffffdd;
+  padding: 12px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  font-weight: 500;
+}
+
+.legend div {
+  margin-bottom: 6px;
+}
+
+.legend span {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.footer-text {
+  text-align: center;
+  font-size: 14px;
+  color: #444;
+  margin-top: 0.2rem;
+  margin-bottom: 2rem;
+  padding: 0 2rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .header-logo {
+    height: 30px;
+    left: 0.5rem;
+  }
+  
+  header h1 {
+    font-size: 1rem;
+  }
+  
+  .title-container {
+    padding-top: 5rem;
+  }
+  
+  .title-container h1 {
+    font-size: 1.5rem;
+  }
+  .title-container p {
+    font-size: 0.9rem;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .toggle-btn {
+    width: 200px;
+    padding: 0.7rem 1rem;
+  }
+  
+  #map {
+    width: 100%;
+    height: 70vh;
+  }
+}
+</style>
