@@ -11,8 +11,8 @@ let BASE_URL = Astro.url.origin
       <h1>AI Hospital Network</h1>
       <p>Displaying all hospitals in the network. Use the buttons to filter the map.</p>
        <div class="controls" style="margin-top: 1rem;">
-        <a href={BASE_URL + "/mirai"} class="nav-btn">View Mirai Map</a>
-        <a href={BASE_URL + "/sybil"} class="nav-btn">View Sybil Map</a>
+        <a href={"hospital-map" + "/mirai"} class="nav-btn">View Mirai Map</a>
+        <a href={"hospital-map" + "/sybil"} class="nav-btn">View Sybil Map</a>
       </div>
     </div>
 		<Map toolFilter="All" />
